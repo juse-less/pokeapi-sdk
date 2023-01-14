@@ -1,0 +1,40 @@
+{
+    "type": "library",
+    "license": "MIT",
+    "name": "juseless/poke-api",
+    "description": "",
+    "keywords": [],
+    "readme": "README.md",
+    "authors": [
+        {"name": "Juse Less", "email": "me@juseless.dev", "role": "Developer"}
+    ],
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "config": {
+        "lock": true,
+        "sort-packages": true
+    },
+    "require": {
+        "php": "~8.1.0",
+        "guzzlehttp/guzzle": "^7.5.0",
+        "sammyjo20/saloon": "v2.x-dev"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^1.9.11",
+        "spatie/ray": "^1.36.0"
+    },
+    "autoload": {
+        "files": [
+            "helpers/functions.php"
+        ],
+        "psr-4": {
+            "JuseLess\\PokeApi\\": "src/",
+            "JuseLess\\PokeApi\\Helpers\\": "helpers/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.x-dev"
+        }
+    }
+}
