@@ -1,0 +1,4 @@
+* text=auto
+
+*.md diff=markdown gitlab-language=markdown
+*.php diff=php gitlab-language=php
