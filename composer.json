@@ -1,7 +1,7 @@
 {
     "type": "library",
     "license": "MIT",
-    "name": "juseless/poke-api",
+    "name": "juseless/pokeapi-sdk",
     "description": "",
     "keywords": [],
     "readme": "README.md",
