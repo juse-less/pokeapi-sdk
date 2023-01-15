@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace JuseLess\PokeApi;
 
 use JuseLess\PokeApi\Contracts\PokeApiConnector as PokeApiConnectorContract;
+use JuseLess\PokeApi\Resources\Pokemon\PokemonRepository;
 use JuseLess\PokeApi\Responses\Contracts\Response;
 use Saloon\Http\Connector;
 use Saloon\Traits\Plugins\AcceptsJson;
@@ -25,5 +26,10 @@ class PokeApiConnector extends Connector implements PokeApiConnectorContract
     public function resolveBaseUrl(): string
     {
         return (string) $this->baseUrl;
+    }
+
+    public function pokemons(): PokemonRepository
+    {
+        return new PokemonRepository($this);
     }
 }
