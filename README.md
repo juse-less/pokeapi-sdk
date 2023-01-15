@@ -60,3 +60,23 @@ foreach ($connector->send($request) as $response) {
     // ...
 }
 ```
+
+### Request Pooling
+Also note that, because the responses are iterable, you can use them directly with the request Pool.
+```php
+use JuseLess\PokeApi\PokeApiConnector;
+use JuseLess\PokeApi\Resources\Pokemon\Responses\GetPokemonsResponse;
+
+$connector = PokeApiConnector::make();
+$pokemons = $connector->pokemons();
+
+$pokemonsResponseHandler = function (GetPokemonsResponse $response): void {
+    // Fictive.
+    handle_pokemons_response($response->json('items'));
+};
+
+$connector
+    ->pool($pokemons->getAll(), responseHandler: $pokemonsResponseHandler)
+    ->send()
+    ->wait();
+```
