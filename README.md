@@ -54,8 +54,9 @@ use JuseLess\PokeApi\PokeApiConnector;
 use JuseLess\PokeApi\Resources\Pokemon\Requests\GetPokemonsRequest;
 
 $connector = PokeApiConnector::make();
+$request = GetPokemonsRequest::make();
 
-foreach ($connector->send(GetPokemonsRequest::make()) as $response) {
+foreach ($connector->send($request) as $response) {
     // ...
 }
 ```
