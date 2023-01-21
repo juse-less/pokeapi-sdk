@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "32be8e7fd8d3e5a4a92d964ad7702d7b",
+    "content-hash": "d84847efeff97c413f442ae4b12ec189",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -547,12 +547,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sammyjo20/Saloon.git",
-                "reference": "a862c51f35fd844b9c5ad2386c5cdf579fdb4e02"
+                "reference": "007789b9e7e6e24d8519447d5b32192ae1a63327"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sammyjo20/Saloon/zipball/a862c51f35fd844b9c5ad2386c5cdf579fdb4e02",
-                "reference": "a862c51f35fd844b9c5ad2386c5cdf579fdb4e02",
+                "url": "https://api.github.com/repos/Sammyjo20/Saloon/zipball/007789b9e7e6e24d8519447d5b32192ae1a63327",
+                "reference": "007789b9e7e6e24d8519447d5b32192ae1a63327",
                 "shasum": ""
             },
             "require": {
@@ -606,7 +606,7 @@
                 "issues": "https://github.com/Sammyjo20/Saloon/issues",
                 "source": "https://github.com/Sammyjo20/Saloon/tree/v2"
             },
-            "time": "2023-01-11T21:59:53+00:00"
+            "time": "2023-01-21T12:07:07+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -735,16 +735,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.9.11",
+            "version": "1.9.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "60f3d68481eef216199eae7a2603cd5fe124d464"
+                "reference": "e5fcc96289cf737304286a9b505fbed091f02e58"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/60f3d68481eef216199eae7a2603cd5fe124d464",
-                "reference": "60f3d68481eef216199eae7a2603cd5fe124d464",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/e5fcc96289cf737304286a9b505fbed091f02e58",
+                "reference": "e5fcc96289cf737304286a9b505fbed091f02e58",
                 "shasum": ""
             },
             "require": {
@@ -774,7 +774,7 @@
             ],
             "support": {
                 "issues": "https://github.com/phpstan/phpstan/issues",
-                "source": "https://github.com/phpstan/phpstan/tree/1.9.11"
+                "source": "https://github.com/phpstan/phpstan/tree/1.9.14"
             },
             "funding": [
                 {
@@ -790,7 +790,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-01-12T14:04:13+00:00"
+            "time": "2023-01-19T10:47:09+00:00"
         },
         {
             "name": "psr/container",
