@@ -20,4 +20,9 @@ interface PagedRequest extends Request
      * @return  $this
      */
     public function limit(int $limit): static;
+
+    /**
+     * @return  $this
+     */
+    public function page(int $page): static;
 }

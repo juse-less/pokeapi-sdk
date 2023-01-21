@@ -37,38 +37,29 @@ $pageOneOfAllPokemons = $pokemons->getAll();
 ```
 
 ### Pagination
-Because `PagedResponse`s are iterable, you can iterate the responses to automagically send the next request,  as long as it has more pages.
+You can iterate a request by giving it as an argument to `PokeApiConnector::paginate()`, or `ResourceRepository`.  
+They will return a `RequestPaginator`, which will send new requests (but bump page/offset) for every iteration in a loop.
 ```php
 use JuseLess\PokeApi\PokeApiConnector;
-use JuseLess\PokeApi\Resources\Pokemon\Requests\GetPokemonsRequest;
-
-$pokemons = PokeApiConnector::make()->pokemons();
-
-foreach ($pokemons->getAll() as $response) {
-    // ...
-}
-```
-
-```php
-use JuseLess\PokeApi\PokeApiConnector;
-use JuseLess\PokeApi\Resources\Pokemon\Requests\GetPokemonsRequest;
 
 $connector = PokeApiConnector::make();
-$request = GetPokemonsRequest::make();
 
-foreach ($connector->send($request) as $response) {
+foreach ($connector->paginate(GetPokemonsRequest::make()) as $response) {
+    // ...
+}
+
+foreach ($connector->pokemons()->paginate(GetPokemonsRequest::make()) as $response) {
     // ...
 }
 ```
 
 ### Request Pooling
-Also note that, because the responses are iterable, you can use them directly with the request Pool.
+Also note that, because the `RequestPaginator`s are iterable, you can use them directly with the request Pool.
 ```php
 use JuseLess\PokeApi\PokeApiConnector;
 use JuseLess\PokeApi\Resources\Pokemon\Responses\GetPokemonsResponse;
 
 $connector = PokeApiConnector::make();
-$pokemons = $connector->pokemons();
 
 $pokemonsResponseHandler = function (GetPokemonsResponse $response): void {
     // Fictive.
@@ -76,7 +67,7 @@ $pokemonsResponseHandler = function (GetPokemonsResponse $response): void {
 };
 
 $connector
-    ->pool($pokemons->getAll(), responseHandler: $pokemonsResponseHandler)
+    ->pool($connector->paginate(GetPokemonsRequest::make()), responseHandler: $pokemonsResponseHandler)
     ->send()
     ->wait();
 ```

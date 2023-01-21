@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace JuseLess\PokeApi;
 
 use JuseLess\PokeApi\Contracts\PokeApiConnector as PokeApiConnectorContract;
+use JuseLess\PokeApi\Requests\Contracts\PagedRequest;
+use JuseLess\PokeApi\Requests\Contracts\RequestPaginator as RequestPaginatorContract;
+use JuseLess\PokeApi\Requests\RequestPaginator;
 use JuseLess\PokeApi\Resources\Pokemon\PokemonRepository;
 use JuseLess\PokeApi\Responses\Contracts\Response;
 use Saloon\Http\Connector;
@@ -26,6 +29,11 @@ class PokeApiConnector extends Connector implements PokeApiConnectorContract
     public function resolveBaseUrl(): string
     {
         return (string) $this->baseUrl;
+    }
+
+    public function paginate(PagedRequest $request): RequestPaginatorContract
+    {
+        return new RequestPaginator($this, $request);
     }
 
     public function pokemons(): PokemonRepository

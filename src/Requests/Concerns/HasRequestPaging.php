@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace JuseLess\PokeApi\Requests\Concerns;
 
-use JuseLess\PokeApi\Requests\Contracts\RequestPaging;
+use JuseLess\PokeApi\Requests\Contracts\RequestPaging as RequestPagingContract;
+use JuseLess\PokeApi\Requests\RequestPaging;
 
 trait HasRequestPaging
 {
     /**
      * @return  $this
      */
-    public function paging(RequestPaging $paging): static
+    public function paging(RequestPagingContract $paging): static
     {
         $this->query()->merge(
             $paging->toArray(),
@@ -42,5 +43,20 @@ trait HasRequestPaging
         ]);
 
         return $this;
+    }
+
+    /**
+     * @return  $this
+     */
+    public function page(int $page): static
+    {
+        if ($page <= 0) {
+            $page = 1;
+        }
+
+        $limit = $this->query()->get('limit', RequestPaging::defaultLimit());
+        $offset = ($page - 1) * $limit;
+
+        return $this->offset($offset);
     }
 }
