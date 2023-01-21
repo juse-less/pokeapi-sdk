@@ -9,6 +9,9 @@ use JuseLess\PokeApi\Requests\Contracts\PagedRequest;
 use JuseLess\PokeApi\Requests\Contracts\RequestPaginator as RequestPaginatorContract;
 use JuseLess\PokeApi\Responses\Contracts\PagedResponse;
 
+// TODO: Add __serialize, __unserialize, as well as JsonSerializable.
+//       That way we can pass the RequestPaginator between processes, and what not, and it'd retain the correct state to continue.
+
 class RequestPaginator implements RequestPaginatorContract
 {
     protected int $page;
