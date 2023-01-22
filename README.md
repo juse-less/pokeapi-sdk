@@ -54,7 +54,7 @@ foreach ($connector->pokemons()->paginate(GetPokemonsRequest::make()) as $respon
 ```
 
 ### Request Pooling
-Also note that, because the `RequestPaginator`s are iterable, you can use them directly with the request Pool.
+Also note that, because `RequestPaginator`s are iterable, you can pass them directly to the request Pool.
 
 ```php
 use JuseLess\PokeApi\PokeApiConnector;
@@ -73,11 +73,12 @@ $connector
         exceptionHandler: function (mixed $reason, string|int $key, $poolAggregate): void {
             //
         },
+    )
     ->send()
     ->wait();
 ```
 
-You can also pool the `RequestPaginator`:
+You can also pool requests by calling `RequestPaginator::pool()` directly.
 
 ```php
 use JuseLess\PokeApi\PokeApiConnector;
