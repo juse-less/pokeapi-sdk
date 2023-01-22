@@ -55,19 +55,48 @@ foreach ($connector->pokemons()->paginate(GetPokemonsRequest::make()) as $respon
 
 ### Request Pooling
 Also note that, because the `RequestPaginator`s are iterable, you can use them directly with the request Pool.
+
 ```php
 use JuseLess\PokeApi\PokeApiConnector;
+use JuseLess\PokeApi\Resources\Pokemon\Requests\GetPokemonsRequest;
 use JuseLess\PokeApi\Resources\Pokemon\Responses\GetPokemonsResponse;
 
 $connector = PokeApiConnector::make();
-
-$pokemonsResponseHandler = function (GetPokemonsResponse $response): void {
-    // Fictive.
-    handle_pokemons_response($response->json('items'));
-};
-
 $connector
-    ->pool($connector->paginate(GetPokemonsRequest::make()), responseHandler: $pokemonsResponseHandler)
+    ->pool(
+        requests: $connector->paginate(GetPokemonsRequest::make()),
+        concurrency: 5,
+        responseHandler: function (GetPokemonsResponse $response, string|int $key, $poolAggregate): void {
+            // Fictive.
+            handle_pokemons_response($response->json('items'));
+        },
+        exceptionHandler: function (mixed $reason, string|int $key, $poolAggregate): void {
+            //
+        },
+    ->send()
+    ->wait();
+```
+
+You can also pool the `RequestPaginator`:
+
+```php
+use JuseLess\PokeApi\PokeApiConnector;
+use JuseLess\PokeApi\Resources\Pokemon\Requests\GetPokemonsRequest;
+use JuseLess\PokeApi\Resources\Pokemon\Responses\GetPokemonsResponse;
+
+$connector = PokeApiConnector::make();
+$connector
+    ->paginate(GetPokemonsRequest::make())
+    ->pool(
+        concurrency: 5,
+        responseHandler: function (GetPokemonsResponse $response, string|int $key, $poolAggregate): void {
+            // Fictive.
+            handle_pokemons_response($response->json('items'));
+        },
+        exceptionHandler: function (mixed $reason, string|int $key, $poolAggregate): void {
+            //
+        },
+    )
     ->send()
     ->wait();
 ```
