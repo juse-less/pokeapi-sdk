@@ -8,6 +8,7 @@ use JuseLess\PokeApi\Contracts\PokeApiConnector;
 use JuseLess\PokeApi\Requests\Contracts\PagedRequest;
 use JuseLess\PokeApi\Requests\Contracts\RequestPaginator as RequestPaginatorContract;
 use JuseLess\PokeApi\Responses\Contracts\PagedResponse;
+use Saloon\Contracts\Pool;
 
 // TODO: Add __serialize, __unserialize, as well as JsonSerializable.
 //       That way we can pass the RequestPaginator between processes, and what not, and it'd retain the correct state to continue.
@@ -28,6 +29,19 @@ class RequestPaginator implements RequestPaginatorContract
         $page = $this->originalRequest->query()->get('page', default: 1);
 
         $this->page = $this->originalPage = $page;
+    }
+
+    public function pool(
+        callable|int $concurrency = 5,
+        callable|null $responseHandler = null,
+        callable|null $exceptionHandler = null,
+    ): Pool {
+        return $this->connector->pool(
+            $this,
+            $concurrency,
+            $responseHandler,
+            $exceptionHandler,
+        );
     }
 
     public function key(): int
