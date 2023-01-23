@@ -15,13 +15,9 @@ use Saloon\Contracts\Response;
 interface RequestPaginator extends \Iterator
 {
     /**
-     * Create a request pool
-     *
-     * @param  int|(callable(int $pending): int) $concurrency
-     * @param  (callable(Response $response, array-key $key, PromiseInterface $aggregatePromise): void)|null $responseHandler
-     * @param  (callable(mixed $reason, array-key $key, PromiseInterface $aggregatePromise): void)|null $exceptionHandler
-     *
-     * @return  Pool
+     * @param  (callable(int $pendingRequests): int)|int $concurrency
+     * @param  (callable(Response $response, array-key $key, PromiseInterface $poolAggregate): void)|null $responseHandler
+     * @param  (callable(mixed $reason, array-key $key, PromiseInterface $poolAggregate): void)|null $exceptionHandler
      */
-    public function pool(int|callable $concurrency = 5, callable|null $responseHandler = null, callable|null $exceptionHandler = null): Pool;
+    public function pool(callable|int $concurrency = 5, callable|null $responseHandler = null, callable|null $exceptionHandler = null): Pool;
 }
